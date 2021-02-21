@@ -1,104 +1,53 @@
-"use strict";
+/* Задания на урок:
 
-// function log(){
-//     this.desc = "logger";
-//     console.log(this);
-// }
-// new log();
+1) Удалить все рекламные блоки со страницы (правая часть сайта)
 
-const personalMovieDB = {
-    count: 0,
-    movies: {},
-    actors: {},
-    genres: [],
-    privat: false,
+2) Изменить жанр фильма, поменять "комедия" на "драма"
 
-    setCountOfMovies: () => {
-        personalMovieDB.count = +prompt('how many movies have you watched?', '');
+3) Изменить задний фон постера с фильмом на изображение "bg.jpg". Оно лежит в папке img.
+Реализовать только при помощи JS
 
-        while (personalMovieDB.count == '' || personalMovieDB.count == null || isNaN(personalMovieDB.count)) {
-            personalMovieDB.count = +prompt('how many movies have you watched?', '');
-        }
-    },
+4) Список фильмов на странице сформировать на основании данных из этого JS файла.
+Отсортировать их по алфавиту 
 
-    rememberMyFilms: () => {
-        for (let i = 0; i < 2; i++) {
-            const a = prompt('last film?', ''),
-                b = prompt('rate?', '');
+5) Добавить нумерацию выведенных фильмов */
 
-            if (a != null && b != null && a != '' && b != '' && a.length < 50) {
-                personalMovieDB.movies[a] = b;
-                console.log('done');
-            } else {
-                console.log('done');
-                i--;
-            }
-        }
-    },
+'use strict';
 
-    detectPersonalLevel: () => {
-        if (personalMovieDB.count < 10) {
-            console.log("просмотреномало фильмов");
-        } else if (personalMovieDB.count < 30) {
-            console.log("любитель");
-        } else if (personalMovieDB.count >= 30) {
-            console.log("киноман");
-        } else {
-            console.log("error2");
-        }
-    },
-
-    showMyDB: (hidden) => {
-        if (!hidden) {
-            console.log(personalMovieDB);
-        }
-    },
-
-    toggleVisibleMyDB: function () {
-        if (personalMovieDB.privat) {
-            personalMovieDB.privat = false;
-        } else {
-            personalMovieDB.privat = true;
-        }
-    },
-
-    writeYourGeneres: () => {
-        for (let i = 1; i <= 3; i++) {
-            let genre = prompt(`ваш любимый жанр под номером: ${i}`, '');
-
-            if(genre == '' || genre == null){
-                console.log('вы вели некоректные данные, повторите пожалуйста');
-                i--;
-            } else {
-                personalMovieDB.genres[i - 1] = genre;
-            }
-        }
-        
-        personalMovieDB.genres.forEach((item, i) => {
-            console.log(`Like genre ${i + 1} - ${item}`);
-        });
-    },
-
-    writeYourGeneres2: () => {
-        for (let i = 1; i <= 1; i++) {
-            let genres = prompt('введите выши жанры через запятую', '').toLowerCase();
-
-            if(genres == '' || genres == null){
-                console.log('вы вели некоректные данные, повторите пожалуйста');
-                i--;
-            } else {
-                personalMovieDB.genres = genres.split(', ');
-            }
-        }
-        personalMovieDB.genres.sort();
-        
-        personalMovieDB.genres.forEach((item, i) => {
-            console.log(`Like genre ${i + 1} - ${item}`);
-        });
-    }
-
+const movieDB = {
+    movies: [
+        "Логан",
+        "Лига справедливости",
+        "Ла-ла лэнд",
+        "Одержимость",
+        "Скотт Пилигрим против..."
+    ]
 };
 
+const   adv = document.querySelectorAll('.promo__adv img'),
+        poster = document.querySelector('.promo__bg'),
+        genre = poster.querySelector('.promo__genre'),
+        movieList = document.querySelector('.promo__interactive-list');
+
+adv.forEach(item => {
+    item.remove();
+});
+
+genre.textContent = 'драма';
+
+poster.style.backgroundImage = 'url("assets/img/bg.jpg")';
+
+movieList.innerHTML = "";
+
+movieDB.movies.sort();
+
+movieDB.movies.forEach((film, i) => {
+    movieList.innerHTML += `
+        <li class="promo__interactive-item">${i + 1} ${film}
+            <div class="delete"></div>
+        </li>
+    `;
+});
 
 
 
@@ -117,12 +66,4 @@ const personalMovieDB = {
 
 
 
-// function AVG(){
-//     let avg = 0;
-//     console.log(arguments.lenght);
-//     for (let i = 0; i< arguments.lenght; i++)
-//     { avg += arguments[i];
-//     }
-//     return avg / arguments.lenght;
-// }
-// console.log(AVG(5,10,15,20));
+
