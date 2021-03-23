@@ -66,14 +66,14 @@ const personalMovieDB = {
         for (let i = 1; i <= 3; i++) {
             let genre = prompt(`ваш любимый жанр под номером: ${i}`, '');
 
-            if(genre == '' || genre == null){
+            if (genre == '' || genre == null) {
                 console.log('вы вели некоректные данные, повторите пожалуйста');
                 i--;
             } else {
                 personalMovieDB.genres[i - 1] = genre;
             }
         }
-        
+
         personalMovieDB.genres.forEach((item, i) => {
             console.log(`Like genre ${i + 1} - ${item}`);
         });
@@ -83,7 +83,7 @@ const personalMovieDB = {
         for (let i = 1; i <= 1; i++) {
             let genres = prompt('введите выши жанры через запятую', '').toLowerCase();
 
-            if(genres == '' || genres == null){
+            if (genres == '' || genres == null) {
                 console.log('вы вели некоректные данные, повторите пожалуйста');
                 i--;
             } else {
@@ -91,7 +91,7 @@ const personalMovieDB = {
             }
         }
         personalMovieDB.genres.sort();
-        
+
         personalMovieDB.genres.forEach((item, i) => {
             console.log(`Like genre ${i + 1} - ${item}`);
         });
@@ -101,24 +101,24 @@ const personalMovieDB = {
 
 
 
-function sortArrNumber(){
+function sortArrNumber() {
     let count = +prompt('введите размер массива', '');
     let arr = [];
-    
-        while (count == '' || count == null || isNaN(count)) {
-            console.log("вы не ввели число или нажали отменна, а так нельзя)");
-            count = +prompt('введите размер массива', '');
-        }
-    for(let i = 0; i < count; i++){    
+
+    while (count == '' || count == null || isNaN(count)) {
+        console.log("вы не ввели число или нажали отменна, а так нельзя)");
+        count = +prompt('введите размер массива', '');
+    }
+    for (let i = 0; i < count; i++) {
         arr[i] = prompt(`введите ${i + 1} из ${count} число`, '');
     }
 
     arr.sort(compareNum);
 
-    function compareNum( a, b ){
+    function compareNum(a, b) {
         return a - b;
     }
-    
+
     console.log(arr);
 
 }
